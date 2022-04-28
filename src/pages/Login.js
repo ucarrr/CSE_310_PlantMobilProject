@@ -65,7 +65,7 @@ function Login({ navigation }) {
             }
 
           >
-            <Text style={styles.signUpText}>Sing Up</Text>
+            <Text style={styles.signUpText}>Sign Up</Text>
           </TouchableOpacity>
 
 
