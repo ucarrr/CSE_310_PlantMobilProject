@@ -1,38 +1,53 @@
 import React from 'react'
 import { View, Text, StyleSheet, Button, Image } from 'react-native'
 import { ImageBackground } from 'react-native'
+import auth from '@react-native-firebase/auth';
 
 
 const AccountPage = ({ navigation }) => {
+
+    const handleSignOut = () => {
+        auth()
+            .signOut()
+            .then(user => {
+                
+                console.log('User signed out!');
+                alert('Account Signed out');
+                navigation.navigate('LoginScreen');
+                
+                
+              }        
+
+            );
+
+    }
     return (
         <View style={styles.container}>
 
 
             <ImageBackground
                 source={require('../assets/eiffel.jpg')}
-                style={styles.backgroundImage }
+                style={styles.backgroundImage}
             >
-            {/* <Image source={require('../assets/abstractblue.png')} style={styles.backgroundImage} /> */}
-            <View>
-                <Text>AccountPage</Text>
-            </View>
+                {/* <Image source={require('../assets/abstractblue.png')} style={styles.backgroundImage} /> */}
+                <View>
+                    <Text>AccountPage</Text>
+                </View>
 
-            <View style={styles.buttonLogOut}>
-                <Button
-                    title="Log Out"
-                    onPress={() =>
-                        navigation.navigate('LoginScreen')
-                    }
+                <View style={styles.buttonLogOut}>
+                    <Button
+                        title="Log Out"
+                        onPress={ handleSignOut }
 
 
-                />
+                    />
 
-            </View>
+                </View>
 
 
             </ImageBackground>
         </View>
-        
+
     )
 }
 const styles = StyleSheet.create({
@@ -41,7 +56,7 @@ const styles = StyleSheet.create({
 
         flex: 1,
         backgroundColor: '#F5FCFF',
-       
+
 
     },
     buttonLogOut: {

@@ -19,7 +19,7 @@ function LoginForm({ navigation }) {
     return (
         <View>
 
-            <Text style={styles.signInText}>Sign In</Text>
+            <Text style={styles.signInText2}>Sign In</Text>
             <TextInput
                 style={{ fontSize: 18 }}
                 placeholder="Email"
@@ -48,22 +48,14 @@ function LoginForm({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    signInText: {
+    signInText2: {
         marginVertical: 10,
         fontSize: 20,
         color: '#333',
 
     },
-    signInButton: {
-        paddingVertical: 15,
-        paddingHorizontal: 10,
-        borderRadius: 3,
-        alignItems: 'center',
-        fontSize: 14,
-        color: "#f1f1f1",
-        backgroundColor: "#0065E0",
-        textAlign: 'center',
-    },
+   
+    
 });
 
 export default LoginForm;

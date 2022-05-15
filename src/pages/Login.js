@@ -1,21 +1,47 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from 'react';
+
 
 import {
   ScrollView,
   StyleSheet,
   Text,
   View,
+  TextInput,
   KeyboardAvoidingView,
   TouchableOpacity,
 } from 'react-native';
 
 import LoginForm from './LoginForm';
+import auth from '@react-native-firebase/auth';
 
 
 
 
 
 function Login({ navigation }) {
+  // Set an initializing state whilst Firebase connects
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        console.log('Log in! with');
+        const user = userCredentials.user;
+        console.log(user.email);
+        navigation.navigate('HomeScreen')
+        
+      })
+      .catch(error => {
+        alert(error.message);
+        console.error(error);
+      }
+      );
+
+  }
+
 
   return (
     <View style={styles.container}>
@@ -30,18 +56,39 @@ function Login({ navigation }) {
         </View>
 
         <View style={styles.loginArea}>
-          <LoginForm />
+          <View>
+
+            <Text style={styles.signInText2}>Sign In</Text>
+            <TextInput
+              style={{ fontSize: 18 }}
+              placeholder="Email"
+              keyboardType="email-address"
+              autoCapitalize='none'
+              returnKeyType={"go"}
+              onSubmitEditing={() => this.passwordInput.focus()}
+              value={email}
+              onChangeText={text=>setEmail(text)}
+            />
+            <TextInput
+              style={{ fontSize: 18 }}
+              placeholder="Password"
+              secureTextEntry={true}
+              value={password}
+              onChangeText={text=>setPassword(text)}
+           
+            />
+
+
+          </View>
           <View style={{ marginTop: 15 }}>
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('HomeScreen')
-              }
+              onPress={ handleLogin}
 
             >
               <Text style={styles.signInButton}>Sign In Now</Text>
             </TouchableOpacity>
 
-            <View style={{marginTop: 15}}>
+            <View style={{ marginTop: 15 }}>
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate('ForgatPasswordPage')
@@ -152,6 +199,12 @@ const styles = StyleSheet.create({
 
     color: '#999',
   },
+  signInText2: {
+    marginVertical: 10,
+    fontSize: 20,
+    color: '#333',
+
+  },
 
   signUpText: {
     marginTop: 10,
@@ -168,7 +221,7 @@ const styles = StyleSheet.create({
   forgatPasswordText: {
 
     color: '#999',
-    
+
     borderBottomColor: 'gray',
     borderBottomWidth: .2,
     borderRadius: 8,

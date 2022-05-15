@@ -6,7 +6,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 function SignUpForm({ navigation }) {
     return (
         <View>
-            <Text style={styles.signInText}>Sign Up</Text>
+            <Text style={styles.signInText2}>Sign Up</Text>
 
 
             <TextInput
@@ -49,7 +49,7 @@ function SignUpForm({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    signInText: {
+    signInText2: {
         marginVertical: 10,
         fontSize: 20,
         color: '#333',
