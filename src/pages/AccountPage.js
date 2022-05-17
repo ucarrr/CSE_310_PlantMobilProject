@@ -10,15 +10,14 @@ const AccountPage = ({ navigation }) => {
         auth()
             .signOut()
             .then(user => {
-                
+
                 console.log('User signed out!');
                 alert('Account Signed out');
                 navigation.navigate('LoginScreen');
-                
-                
-              }        
 
-            );
+
+            })
+            .catch(error => alert(error.message));
 
     }
     return (
@@ -33,11 +32,14 @@ const AccountPage = ({ navigation }) => {
                 <View>
                     <Text>AccountPage</Text>
                 </View>
+                <Text style={{ fontSize: 20, }}>Email :{auth().currentUser?.email}</Text>
+                <View>
 
+                </View>
                 <View style={styles.buttonLogOut}>
                     <Button
                         title="Log Out"
-                        onPress={ handleSignOut }
+                        onPress={handleSignOut}
 
 
                     />

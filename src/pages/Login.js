@@ -22,7 +22,17 @@ function Login({ navigation }) {
   // Set an initializing state whilst Firebase connects
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+{/**
 
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(user => {
+      if(user){
+        navigation.navigate('HomeScreen')
+      }
+    });
+    return subscriber; // unsubscribe on unmount
+  }, []);
+ */}
   const handleLogin = () => {
 
     auth()
@@ -68,6 +78,7 @@ function Login({ navigation }) {
               onSubmitEditing={() => this.passwordInput.focus()}
               value={email}
               onChangeText={text=>setEmail(text)}
+               
             />
             <TextInput
               style={{ fontSize: 18 }}
@@ -75,6 +86,7 @@ function Login({ navigation }) {
               secureTextEntry={true}
               value={password}
               onChangeText={text=>setPassword(text)}
+          
            
             />
 

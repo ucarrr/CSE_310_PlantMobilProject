@@ -13,24 +13,42 @@ import {
 import SignUpForm from './SignUpForm';
 import auth from '@react-native-firebase/auth';
 
+import database from '@react-native-firebase/database';
 
 
 function SignUp({ navigation }) {
   // Set an initializing state whilst Firebase connects
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [comfirmpassword, setComfirmPassword] = useState('');
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [phone, setPhone] = useState('');
+  let dataToSave={
+    name:name,
+    surname:surname,
+    email:email,
+    phone:phone,
+    password:password,
+
+  };
+
 
   const handleSignUp = () => {
 
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(userCredentials => {
+        database().ref('users').push(dataToSave).then(usersinfo => {
+          console.log('user information saved in Realtime Database.');
+    
+        }).catch(error => {console.error(error);})
         console.log('User account created & signed in!');
         const user = userCredentials.user;
         console.log(user.email);
         alert('Account created');
-        navigation.navigate('Login');
-        
+      
+        {/**  navigation.navigate('Login');   //navigation   */} 
         
       })
       .catch(error => {
@@ -45,7 +63,7 @@ function SignUp({ navigation }) {
         console.error(error);
       }
       );
-
+      
   }
   return (
     <View style={styles.container}>
@@ -64,6 +82,8 @@ function SignUp({ navigation }) {
                 placeholder="Name"
                 autoCapitalize='none'
                 returnKeyType={"go"}
+                value={name}
+                onChangeText={text => setName(text)}
 
               />
               <TextInput
@@ -71,6 +91,8 @@ function SignUp({ navigation }) {
                 placeholder="Surname"
                 autoCapitalize='none'
                 returnKeyType={"go"}
+                value={surname}
+                onChangeText={text => setSurname(text)}
 
               />
               <TextInput
@@ -86,6 +108,8 @@ function SignUp({ navigation }) {
                 style={{ fontSize: 18, color: '#27ae60' }}
                 placeholder="Phone"
                 keyboardType="phone-pad"
+                value={phone}
+                onChangeText={text => setPhone(text)}
 
 
               />
@@ -101,8 +125,8 @@ function SignUp({ navigation }) {
                 style={{ fontSize: 18, color: '#27ae60' }}
                 placeholder="Confirm Password"
                 secureTextEntry={true}
-                value={password}
-                onChangeText={text => setPassword(text)}
+                value={comfirmpassword}
+                onChangeText={text => setComfirmPassword(text)}
 
               />
 
