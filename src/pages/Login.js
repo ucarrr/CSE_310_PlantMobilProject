@@ -22,7 +22,7 @@ function Login({ navigation }) {
   // Set an initializing state whilst Firebase connects
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-{/**
+
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(user => {
@@ -32,7 +32,7 @@ function Login({ navigation }) {
     });
     return subscriber; // unsubscribe on unmount
   }, []);
- */}
+ 
   const handleLogin = () => {
 
     auth()
