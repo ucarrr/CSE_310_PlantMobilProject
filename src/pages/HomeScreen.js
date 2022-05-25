@@ -22,7 +22,7 @@ const HomeScreen = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             getData();
-        }, 15000);
+        }, 50000);
 
         return () => clearInterval(interval);
     }, []);
@@ -39,10 +39,10 @@ const HomeScreen = () => {
                 renderItem={({ item }) => <View style={styles.container}>
                     <View style={styles.styletitle}>
                         <Text>id:{item.id}</Text>
-                        <Text >title: {item.temperature}</Text>
-                        <Text>title: {item.humidity}</Text>
-                        <Text>body: {item.moisture}</Text>
-                        <Text>body: {item.date}</Text>
+                        <Text >temperature : {item.temperature}</Text>
+                        <Text>title : {item.humidity}</Text>
+                        <Text>humidity : {item.moisture}</Text>
+                        <Text>date : {item.date}</Text>
                     </View>
 
                 </View>}
