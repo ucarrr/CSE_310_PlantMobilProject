@@ -1,40 +1,35 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet,TouchableOpacity,TextInput } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 
 const SettingPage = () => {
     const [heat, setHeat] = useState('')
 
-    function handleTransfer() {
-        fetch('http://192.168.43.171:5000/postData', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ heat })
-        }).then(() => {
-            console.log("heat: " + heat)
-        })
 
-        fetch('http://192.168.43.171:5000/postData').then(
-            response => response.json()
-        ).then(data => setBackendData(data))
-    }
-
+    const pumpOpen = () => {
+        return fetch('http://192.168.43.171:5000/pumpOpen');
+    };    
     return (
         <View style={styles.container}>
             <Text>SettingPage</Text>
-            <TextInput
-                style={{ fontSize: 18, color: '#27ae60' }}
-                placeholder="Heat"
-                value={heat}
-                keyboardType="numeric"
-                onChangeText={(text) => setHeat(text)}
+            <View>
+                <TextInput
+                    style={{ fontSize: 18, color: '#27ae60' }}
+                    placeholder="Heat"
+                    value={heat}
+                    keyboardType="numeric"
+                    onChangeText={(text) => setHeat(text)}
 
-            />
+                />
+            
+            </View>
             <TouchableOpacity
-                onPress={handleTransfer}
-
+                onPress={pumpOpen}
             >
-                <Text style={styles.heatButton}>Send Heat</Text>
+                <Text style={styles.heatButton}>open pump</Text>
             </TouchableOpacity>
+            <View>
+
+            </View>
         </View>
     )
 }

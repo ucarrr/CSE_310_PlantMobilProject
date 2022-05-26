@@ -1,5 +1,9 @@
-import { StyleSheet, Text, View ,SafeAreaView,FlatList} from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, FlatList, Image } from 'react-native'
 import React, { useState, useEffect } from 'react';
+
+
+
+
 
 
 
@@ -22,14 +26,21 @@ const HomeScreen = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             getData();
-        }, 50000);
+        }, 10000);
 
         return () => clearInterval(interval);
     }, []);
 
     return (
         <SafeAreaView>
-            <Text>HomeScreen</Text>
+
+            <Text>HomeScreen
+
+
+            </Text>
+
+
+
             <FlatList
                 data={data}
 
@@ -38,11 +49,27 @@ const HomeScreen = () => {
                 ListEmptyComponent={() => <View><Text>Veri Yok</Text></View>}
                 renderItem={({ item }) => <View style={styles.container}>
                     <View style={styles.styletitle}>
-                        <Text>id:{item.id}</Text>
-                        <Text >temperature : {item.temperature}</Text>
-                        <Text>title : {item.humidity}</Text>
-                        <Text>humidity : {item.moisture}</Text>
-                        <Text>date : {item.date}</Text>
+                        <View>
+                            <Text>id:{item.id}</Text>
+                        </View>
+                        <View>
+                            <Text >temperature : {item.temperature}</Text>
+
+                        </View>
+                        <View>
+                            <Text>title : {item.humidity}</Text>
+                        </View>
+                        <View>
+                            <Text>humidity : {item.moisture}</Text>
+                        </View>
+                        <View>
+                            <Text>date : {item.date}</Text>
+                        </View>
+
+
+
+
+
                     </View>
 
                 </View>}
@@ -68,9 +95,22 @@ const styles = StyleSheet.create({
     },
     styletitle: {
         padding: 5,
+        flex: 1,
         backgroundColor: '#ddd',
         marginBottom: 5,
         borderRadius: 10,
     },
+    style1: {
+        fontWeight: '700'
+    },
+    style2: {
+        fontWeight: '100'
+    },
+    imagestyle: {
+        width: 80,
+        height: 200,
+        resizeMode: 'contain',
+        alignItems: "center",
+    }
 
 })
